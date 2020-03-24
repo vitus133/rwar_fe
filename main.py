@@ -30,10 +30,24 @@ class ItemBackdropBackLayer(ThemableBehavior, BoxLayout):
         return super().on_touch_down(touch)
 
 
+class TextItemBackdropBackLayer(ThemableBehavior, BoxLayout):
+    icon = StringProperty("android")
+    text = StringProperty()
+    selected_item = BooleanProperty(False)
+    def on_touch_down(self, touch):
+        if self.collide_point(touch.x, touch.y):
+            for item in self.parent.children:
+                if item.selected_item:
+                    item.selected_item = False
+            self.selected_item = True
+        return super().on_touch_down(touch)
+
+
+
 class MainApp(MDApp):
     def __init__(self, **kwargs):
         self.title = "KivyMD Example - Backdrop"
-        self.theme_cls.primary_palette = "DeepPurple"
+        self.theme_cls.primary_palette = "BlueGray"
         super().__init__(**kwargs)
         
 

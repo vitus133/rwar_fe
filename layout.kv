@@ -34,6 +34,34 @@
         color: 1, 1, 1, .5 if not root.selected_item else 1, 1, 1, 1
 
 
+
+
+<TextItemBackdropBackLayer>
+    size_hint_y: None
+    height: "80dp"
+
+    IconLeftWidget:
+        icon: root.icon
+        theme_text_color: "Custom"
+        text_color: root.theme_cls.opposite_text_color
+        on_press: print(root.theme_cls.__dir__())
+
+    MDTextField:
+        # padding: 20
+        text: root.text
+        # max_text_length: 
+        hint_text: "Hint text"
+        # helper_text: "Helper text"
+        # helper_text_mode: "persistent"
+        color_mode: "custom"
+        line_color_focus: root.theme_cls.opposite_text_color
+        hint_text_color: root.theme_cls.opposite_text_color
+        helper_text_color: root.theme_cls.opposite_text_color
+        foreground_color: app.theme_cls.opposite_text_color
+        # line_color_normal: 1, 1, 1, .5 if not root.selected_item else 1, 1, 1, 1
+        #custom_color: 0, 1, 0, 1
+
+
 <ItemBackdropBackLayerOfSecondScreen@BoxLayout>
     size_hint_y: None
     height: "40dp"
@@ -95,7 +123,8 @@
             on_press:
                 root.backlayer.current = "screen one"
                 root.backdrop.open()
-
+        MDTextField:
+                hint_text: "No helper text"
         ItemBackdropFrontLayer:
             text: "Press item"
             secondary_text: "to Start VPN"
@@ -119,10 +148,10 @@
                 cols: 1
                 padding: "5dp"
 
-                ItemBackdropBackLayer:
+                TextItemBackdropBackLayer:
                     icon: "theater"
-                    text: "TV & Home Theaters"
-                ItemBackdropBackLayer:
+                    text: ""
+                TextItemBackdropBackLayer:
                     icon: "desktop-mac"
                     text: "Computers"
                 ItemBackdropBackLayer:
