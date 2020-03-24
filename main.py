@@ -35,6 +35,7 @@ class MainApp(MDApp):
         self.title = "KivyMD Example - Backdrop"
         self.theme_cls.primary_palette = "DeepPurple"
         super().__init__(**kwargs)
+        
 
     def build(self):
         self.root = ExampleBackdrop()

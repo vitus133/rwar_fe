@@ -82,33 +82,34 @@
 
         ItemBackdropFrontLayer:
             text: "Press item"
-            secondary_text: "to Shop Electronics"
+            secondary_text: "to Configure DigitalOcean"
             icon: "monitor-star"
             on_press:
-                root.backlayer.current = "second screen"
+                root.backlayer.current = "screen two"
                 root.backdrop.open()
 
         ItemBackdropFrontLayer:
             text: "Press item"
-            secondary_text: "to Back"
+            secondary_text: "to Configure Freenom"
             icon: "arrange-send-backward"
             on_press:
-                root.backlayer.current = "one screen"
+                root.backlayer.current = "screen one"
                 root.backdrop.open()
 
         ItemBackdropFrontLayer:
-            text: "Lower the front layer"
-            secondary_text: " by 50 %"
+            text: "Press item"
+            secondary_text: "to Start VPN"
             icon: "transfer-down"
             on_press:
-                root.backdrop.open(-Window.height / 2)
+                root.backlayer.current = "screen three"
+                root.backdrop.open()
 
 
 <MyBackdropBackLayer@ScreenManager>
     transition: NoTransition()
 
     Screen:
-        name: "one screen"
+        name: "screen one"
 
         ScrollView
 
@@ -144,7 +145,7 @@
                     text: "Music"
 
     Screen:
-        name: "second screen"
+        name: "screen two"
 
         ScrollView
 
@@ -192,3 +193,31 @@
                     text: "TVs 39\"-50\""
                 ItemRoundBackdropBackLayerOfSecondScreen:
                     text: "TVs 55\" or larger"
+    Screen:
+        name: "screen three"
+
+        ScrollView
+
+            GridLayout:
+                size_hint_y: None
+                height: self.minimum_height
+                cols: 1
+                padding: "15dp"
+                spacing: "10dp"
+
+                MDLabel:
+                    text: "Types of TVs Home Theater Product"
+                    color: 1, 1, 1, 1
+
+                Widget:
+                    size_hint_y: None
+                    height: "10dp"
+
+
+                MDSeparator:
+
+                Widget:
+                    size_hint_y: None
+                    height: "15dp"
+
+                MDLabel:
