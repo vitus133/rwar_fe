@@ -15,24 +15,7 @@ Builder.load_file("backdrop.kv")
 class ExampleBackdrop(Screen):
     pass
 
-
-class ItemBackdropBackLayer(ThemableBehavior, BoxLayout):
-    icon = StringProperty("android")
-    text = StringProperty()
-    selected_item = BooleanProperty(False)
-
-    def on_touch_down(self, touch):
-        if self.collide_point(touch.x, touch.y):
-            for item in self.parent.children:
-                if item.selected_item:
-                    item.selected_item = False
-            self.selected_item = True
-        return super().on_touch_down(touch)
-
-
-class TextItemBackdropBackLayer(ThemableBehavior, BoxLayout):
-    icon = StringProperty("android")
-    text = StringProperty()
+class SelectableItem(ThemableBehavior):
     selected_item = BooleanProperty(False)
     def on_touch_down(self, touch):
         if self.collide_point(touch.x, touch.y):
@@ -42,11 +25,39 @@ class TextItemBackdropBackLayer(ThemableBehavior, BoxLayout):
             self.selected_item = True
         return super().on_touch_down(touch)
 
+class ItemBackdropBackLayer(SelectableItem, BoxLayout):
+    icon = StringProperty("android")
+    text = StringProperty()
+    selected_item = BooleanProperty(False)
 
+    # def on_touch_down(self, touch):
+    #     if self.collide_point(touch.x, touch.y):
+    #         for item in self.parent.children:
+    #             if item.selected_item:
+    #                 item.selected_item = False
+    #         self.selected_item = True
+    #     return super().on_touch_down(touch)
+
+
+class TextItemBackdropBackLayer(SelectableItem, BoxLayout):
+    icon = StringProperty("android")
+    text = StringProperty()
+    hint_text = StringProperty()
+    # selected_item = BooleanProperty(False)
+    # def on_touch_down(self, touch):
+    #     if self.collide_point(touch.x, touch.y):
+    #         for item in self.parent.children:
+    #             if item.selected_item:
+    #                 item.selected_item = False
+    #         self.selected_item = True
+    #     return super().on_touch_down(touch)
+
+class CheckBoxOption(SelectableItem, BoxLayout):
+    pass
 
 class MainApp(MDApp):
     def __init__(self, **kwargs):
-        self.title = "KivyMD Example - Backdrop"
+        self.title = "RWAR VPN"
         self.theme_cls.primary_palette = "BlueGray"
         super().__init__(**kwargs)
         

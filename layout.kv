@@ -50,7 +50,7 @@
         # padding: 20
         text: root.text
         # max_text_length: 
-        hint_text: "Hint text"
+        hint_text: root.hint_text
         # helper_text: "Helper text"
         # helper_text_mode: "persistent"
         color_mode: "custom"
@@ -58,8 +58,31 @@
         hint_text_color: root.theme_cls.opposite_text_color
         helper_text_color: root.theme_cls.opposite_text_color
         foreground_color: app.theme_cls.opposite_text_color
+        multiline: True
         # line_color_normal: 1, 1, 1, .5 if not root.selected_item else 1, 1, 1, 1
         #custom_color: 0, 1, 0, 1
+
+<CheckBoxOption>
+    orientation: "horizontal"
+    size_hint_y: None
+    height: "40dp"
+    spacing: "10dp"
+    padding: "8.5dp"
+    text: ""
+
+    MDCheckbox:
+        id: check
+        size_hint: None, None
+        size: "30dp", "30dp"
+        active: False or self.active
+        pos_hint: {"center_y": .5}
+        selected_color: 1, 1, 1, 1
+
+    MDLabel:
+        text: root.text
+        #color: 1, 1, 1, .5
+        color: 1, 1, 1, .5 if not root.ids.check.active else 1, 1, 1, 1
+
 
 
 <ItemBackdropBackLayerOfSecondScreen@BoxLayout>
@@ -113,15 +136,15 @@
             secondary_text: "to Configure DigitalOcean"
             icon: "digital-ocean"
             on_press:
-                root.backlayer.current = "screen two"
-                root.backdrop.open()
+                root.backlayer.current = "screen one"
+                root.backdrop.open(-Window.height / 2)
 
         ItemBackdropFrontLayer:
             text: "Press item"
             secondary_text: "to Configure Freenom"
             icon: "record-circle-outline"
             on_press:
-                root.backlayer.current = "screen one"
+                root.backlayer.current = "screen two"
                 root.backdrop.open()
         MDTextField:
                 hint_text: "No helper text"
@@ -150,28 +173,32 @@
 
                 TextItemBackdropBackLayer:
                     icon: "theater"
-                    text: ""
-                TextItemBackdropBackLayer:
-                    icon: "desktop-mac"
-                    text: "Computers"
+                    text: "API key"
+                    hint_text: "API key"
+                
+                CheckBoxOption:
+                    text: "Enable automatic tear-down"
+                # TextItemBackdropBackLayer:
+                #     icon: "desktop-mac"
+                #     text: "Computers"
                 ItemBackdropBackLayer:
                     icon: "camera-plus-outline"
                     text: "Camera and Camcorders"
-                ItemBackdropBackLayer:
-                    icon: "speaker"
-                    text: "Speakers"
-                ItemBackdropBackLayer:
-                    icon: "cellphone-iphone"
-                    text: "Mobile Phones"
-                ItemBackdropBackLayer:
-                    icon: "movie-outline"
-                    text: "Movies"
-                ItemBackdropBackLayer:
-                    icon: "gamepad-variant-outline"
-                    text: "Games"
-                ItemBackdropBackLayer:
-                    icon: "music-circle-outline"
-                    text: "Music"
+                # ItemBackdropBackLayer:
+                #     icon: "speaker"
+                #     text: "Speakers"
+                # ItemBackdropBackLayer:
+                #     icon: "cellphone-iphone"
+                #     text: "Mobile Phones"
+                # ItemBackdropBackLayer:
+                #     icon: "movie-outline"
+                #     text: "Movies"
+                # ItemBackdropBackLayer:
+                #     icon: "gamepad-variant-outline"
+                #     text: "Games"
+                # ItemBackdropBackLayer:
+                #     icon: "music-circle-outline"
+                #     text: "Music"
 
     Screen:
         name: "screen two"
