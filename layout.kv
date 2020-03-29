@@ -35,9 +35,7 @@
         color: 1, 1, 1, .5 if not root.selected_item else 1, 1, 1, 1
 
 
-
-
-<TextItemBackdropBackLayer>
+<TextItemScreen2>
     size_hint_y: None
     height: "80dp"
 
@@ -45,7 +43,6 @@
         icon: root.icon
         theme_text_color: "Custom"
         text_color: root.theme_cls.opposite_text_color
-        on_press: print(root.theme_cls.__dir__())
 
     MDTextField:
         # padding: 20
@@ -62,6 +59,7 @@
         multiline: True
         # line_color_normal: 1, 1, 1, .5 if not root.selected_item else 1, 1, 1, 1
         #custom_color: 0, 1, 0, 1
+
 
 <CheckBoxOption>
     orientation: "horizontal"
@@ -86,7 +84,7 @@
 
 
 
-<ItemBackdropBackLayerOfSecondScreen@BoxLayout>
+<CheckboxBackdrop@BoxLayout>
     size_hint_y: None
     height: "40dp"
     spacing: "25dp"
@@ -104,18 +102,25 @@
         color: 1, 1, 1, .7
 
 
-<ItemRoundBackdropBackLayerOfSecondScreen@BoxLayout>
+<RadioButtonBackdrop@BoxLayout>
     size_hint_y: None
     height: "40dp"
     spacing: "25dp"
+    padding: "9dp"
     text: ""
+    iden: ""
+    group: ""
+    active: False
 
     MDCheckbox:
-        group: "size"
+        id: root.id
+        group: root.group
         size_hint: None, None
         size: "30dp", "30dp"
         pos_hint: {"center_y": .5}
         selected_color: 1, 1, 1, 1
+        on_state: print(root.iden, root.text, self.state)
+        active: root.active
 
     MDLabel:
         text: root.text
@@ -137,15 +142,16 @@
             secondary_text: "to Configure DigitalOcean"
             icon: "digital-ocean"
             on_press:
-                root.backlayer.current = "screen one"
-                root.backdrop.open(-Window.height / 2)
+                root.backlayer.current = "DigitalOcean screen"
+                # root.backdrop.open(-Window.height / 2)
+                root.backdrop.open()
 
         ItemBackdropFrontLayer:
             text: "Press item"
             secondary_text: "to Configure Freenom"
             icon: "record-circle-outline"
             on_press:
-                root.backlayer.current = "screen two"
+                root.backlayer.current = "screen three"
                 root.backdrop.open()
         MDTextField:
                 hint_text: "No helper text"
@@ -161,59 +167,9 @@
 <MyBackdropBackLayer@ScreenManager>
     transition: NoTransition()
 
-    Screen:
-        name: "screen one"
-
-        ScrollView
-
-            GridLayout:
-                size_hint_y: None
-                height: self.minimum_height
-                cols: 1
-                padding: "5dp"
-
-                TextItemBackdropBackLayer:
-                    icon: "theater"
-                    text: "API key"
-                    hint_text: "API key"
-                
-                CheckBoxOption:
-                    text: "Enable automatic tear-down"
-
-                DropDownOption:
-                    id: dropdown_item
-                    padding: "20dp"
-                    color_mode: "custom"
-                    #line_color_focus: root.theme_cls.opposite_text_color
-                    #dropdown_bg: app.theme_cls.opposite_text_color
-                    dropdown_width_mult: 2
-                    items: ["1 hour", "2 hours", "4 hours", "8 hours", "24 hours", "7 days"]
-                    dropdown_bg: [1, 1, 1, 0.75]
-                    on_touch_down: app.debug_print()
-                # TextItemBackdropBackLayer:
-                #     icon: "desktop-mac"
-                #     text: "Computers"
-                # ItemBackdropBackLayer:
-                #     icon: "camera-plus-outline"
-                #     text: "Camera and Camcorders"
-                # ItemBackdropBackLayer:
-                #     icon: "speaker"
-                #     text: "Speakers"
-                # ItemBackdropBackLayer:
-                #     icon: "cellphone-iphone"
-                #     text: "Mobile Phones"
-                # ItemBackdropBackLayer:
-                #     icon: "movie-outline"
-                #     text: "Movies"
-                # ItemBackdropBackLayer:
-                #     icon: "gamepad-variant-outline"
-                #     text: "Games"
-                # ItemBackdropBackLayer:
-                #     icon: "music-circle-outline"
-                #     text: "Music"
 
     Screen:
-        name: "screen two"
+        name: "DigitalOcean screen"
 
         ScrollView
 
@@ -225,42 +181,37 @@
                 spacing: "10dp"
 
                 MDLabel:
-                    text: "Types of TVs Home Theater Product"
+                    text: "DigitalOcean settings"
                     color: 1, 1, 1, 1
 
-                Widget:
-                    size_hint_y: None
-                    height: "10dp"
-
-                ItemBackdropBackLayerOfSecondScreen:
-                    text: "Smart TV"
-                ItemBackdropBackLayerOfSecondScreen:
-                    text: "4K Ultra HD TVs"
-                ItemBackdropBackLayerOfSecondScreen:
-                    text: "Curved TVs"
-                ItemBackdropBackLayerOfSecondScreen:
-                    text: "OLED TVs"
-                ItemBackdropBackLayerOfSecondScreen:
-                    text: "LED TVs"
-                ItemBackdropBackLayerOfSecondScreen:
-                    text: "Home Theater Systems"
-
-                MDSeparator:
-
-                Widget:
-                    size_hint_y: None
-                    height: "15dp"
+                TextItemScreen2:
+                    icon: "key"
+                    text: ""
+                    hint_text: "API key"
+                # CheckboxBackdrop:
+                #     text: "Home Theater Systems"
 
                 MDLabel:
-                    text: "Types of TVs Home Theater Product"
+                    text: "Automatic tear-down after "
                     color: 1, 1, 1, 1
+                RadioButtonBackdrop:
+                    iden: "rbOneHour"
+                    text: "One hour"
+                    group: "tear-down"
+                    active: True
+                RadioButtonBackdrop:
+                    iden: "rbFourHours"
+                    text: "Four hours"
+                    group: "tear-down"
+                RadioButtonBackdrop:
+                    iden: "rbOneDay"
+                    text: "One day"
+                    group: "tear-down"
+                RadioButtonBackdrop:
+                    iden: "rbNever"
+                    text: "Never"
+                    group: "tear-down"
 
-                ItemRoundBackdropBackLayerOfSecondScreen:
-                    text: "TVs up to 32\""
-                ItemRoundBackdropBackLayerOfSecondScreen:
-                    text: "TVs 39\"-50\""
-                ItemRoundBackdropBackLayerOfSecondScreen:
-                    text: "TVs 55\" or larger"
     Screen:
         name: "screen three"
 

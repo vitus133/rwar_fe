@@ -33,7 +33,7 @@ class ItemBackdropBackLayer(SelectableItem, BoxLayout):
     selected_item = BooleanProperty(False)
 
 
-class TextItemBackdropBackLayer(SelectableItem, BoxLayout):
+class TextItemScreen2(ThemableBehavior, BoxLayout):
     icon = StringProperty("android")
     text = StringProperty()
     hint_text = StringProperty()
