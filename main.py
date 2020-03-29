@@ -16,35 +16,11 @@ Builder.load_file("backdrop.kv")
 class ExampleBackdrop(Screen):
     pass
 
-class SelectableItem(ThemableBehavior):
-    selected_item = BooleanProperty(False)
-    def on_touch_down(self, touch):
-        if self.collide_point(touch.x, touch.y):
-            for item in self.parent.children:
-                if item.selected_item:
-                    item.selected_item = False
-            self.selected_item = True
-        return super().on_touch_down(touch)
 
-
-class ItemBackdropBackLayer(SelectableItem, BoxLayout):
-    icon = StringProperty("android")
-    text = StringProperty()
-    selected_item = BooleanProperty(False)
-
-
-class TextItemScreen2(ThemableBehavior, BoxLayout):
+class BackLayerTextItem(ThemableBehavior, BoxLayout):
     icon = StringProperty("android")
     text = StringProperty()
     hint_text = StringProperty()
-
-
-class CheckBoxOption(SelectableItem, BoxLayout):
-    pass
-
-
-class DropDownOption(MDDropDownItem, SelectableItem):
-    pass
 
 
 class MainApp(MDApp):

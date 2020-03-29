@@ -11,31 +11,7 @@
         icon: root.icon
 
 
-<ItemBackdropBackLayer>
-    size_hint_y: None
-    height: self.minimum_height
-    spacing: "10dp"
-
-    canvas:
-        Color:
-            rgba:
-                root.theme_cls.primary_dark if root.selected_item \
-                else root.theme_cls.primary_color
-        RoundedRectangle:
-            pos: self.pos
-            size: self.size
-
-    MDIconButton:
-        icon: root.icon
-        theme_text_color: "Custom"
-        text_color: 1, 1, 1, .5 if not root.selected_item else 1, 1, 1, 1
-
-    MDLabel:
-        text: root.text
-        color: 1, 1, 1, .5 if not root.selected_item else 1, 1, 1, 1
-
-
-<TextItemScreen2>
+<BackLayerTextItem>
     size_hint_y: None
     height: "80dp"
 
@@ -45,7 +21,6 @@
         text_color: root.theme_cls.opposite_text_color
 
     MDTextField:
-        # padding: 20
         text: root.text
         # max_text_length: 
         hint_text: root.hint_text
@@ -57,31 +32,6 @@
         helper_text_color: root.theme_cls.opposite_text_color
         foreground_color: app.theme_cls.opposite_text_color
         multiline: True
-        # line_color_normal: 1, 1, 1, .5 if not root.selected_item else 1, 1, 1, 1
-        #custom_color: 0, 1, 0, 1
-
-
-<CheckBoxOption>
-    orientation: "horizontal"
-    size_hint_y: None
-    height: "40dp"
-    spacing: "10dp"
-    padding: "8.5dp"
-    text: ""
-
-    MDCheckbox:
-        id: check
-        size_hint: None, None
-        size: "30dp", "30dp"
-        active: False or self.active
-        pos_hint: {"center_y": .5}
-        selected_color: 1, 1, 1, 1
-
-    MDLabel:
-        text: root.text
-        #color: 1, 1, 1, .5
-        color: 1, 1, 1, .5 if not root.ids.check.active else 1, 1, 1, 1
-
 
 
 <CheckboxBackdrop@BoxLayout>
@@ -127,7 +77,7 @@
         color: 1, 1, 1, .7
 
 
-<MyBackdropFrontLayer@ScrollView>
+<FrontLayer@ScrollView>
     backdrop: None
     backlayer: None
 
@@ -153,8 +103,7 @@
             on_press:
                 root.backlayer.current = "screen three"
                 root.backdrop.open()
-        MDTextField:
-                hint_text: "No helper text"
+
         ItemBackdropFrontLayer:
             text: "Press item"
             secondary_text: "to Start VPN"
@@ -164,9 +113,8 @@
                 root.backdrop.open()
 
 
-<MyBackdropBackLayer@ScreenManager>
+<BackLayer@ScreenManager>
     transition: NoTransition()
-
 
     Screen:
         name: "DigitalOcean screen"
@@ -184,12 +132,12 @@
                     text: "DigitalOcean settings"
                     color: 1, 1, 1, 1
 
-                TextItemScreen2:
+                BackLayerTextItem:
                     icon: "key"
                     text: ""
                     hint_text: "API key"
                 # CheckboxBackdrop:
-                #     text: "Home Theater Systems"
+                #     text: "Checkbox text"
 
                 MDLabel:
                     text: "Automatic tear-down after "
