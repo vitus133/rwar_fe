@@ -74,7 +74,8 @@
         size: "30dp", "30dp"
         pos_hint: {"center_y": .5}
         selected_color: 1, 1, 1, 1
-        on_state: print(root.iden, root.text, self.state)
+        # on_state: print(root.iden, root.text, self.state, root.group)
+        on_state: app.store_group(root.group, root.iden, self.state)
         active: root.active
 
     MDLabel:
@@ -159,19 +160,23 @@
                     iden: "rbOneHour"
                     text: "One hour"
                     group: "tear-down"
-                    active: True
+                    # active: True
+                    active: app.store.store_exists(self.group) and app.store.get(self.group).get(self.iden) == "down"
                 RadioButtonBackdrop:
                     iden: "rbFourHours"
                     text: "Four hours"
                     group: "tear-down"
+                    active: app.store.store_exists(self.group) and app.store.get(self.group).get(self.iden) == "down"
                 RadioButtonBackdrop:
                     iden: "rbOneDay"
                     text: "One day"
                     group: "tear-down"
+                    active: app.store.store_exists(self.group) and app.store.get(self.group).get(self.iden) == "down"
                 RadioButtonBackdrop:
                     iden: "rbNever"
                     text: "Never"
                     group: "tear-down"
+                    active: app.store.store_exists(self.group) and app.store.get(self.group).get(self.iden) == "down"
 
     Screen:
         name: "DuckDns screen"

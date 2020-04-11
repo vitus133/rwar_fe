@@ -25,7 +25,7 @@ class BackLayerTextItem(ThemableBehavior, BoxLayout):
 
 class MainApp(MDApp):
     def __init__(self, **kwargs):
-        self.title = "RWAR VPN"
+        self.title = "VPN server on demand"
         self.theme_cls.primary_palette = "BlueGray"
         super().__init__(**kwargs)
         self.store = JsonStore('rwar_vpn.json')
@@ -34,9 +34,17 @@ class MainApp(MDApp):
     def build(self):
         self.root = ExampleBackdrop()
 
-    def store_kv(self, key: str, value: str):
+    def store_kv(self, key: str, value):
         self.store.store_put(key, value)
         self.store.store_sync()
+
+    def store_group(self, group, iden, state):
+        if self.store.store_exists(group):
+            data = self.store.store_get(group)
+        else:
+            data = {}
+        data[iden] = state
+        self.store_kv(group, data)
 
 
 if __name__ == "__main__":
