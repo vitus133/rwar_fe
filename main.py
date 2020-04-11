@@ -4,6 +4,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen
 from kivymd.app import MDApp
 from kivymd.theming import ThemableBehavior
+from kivy.storage.jsonstore import JsonStore
 
 
 # Your layouts.
@@ -28,6 +29,7 @@ class MainApp(MDApp):
         self.title = "RWAR VPN"
         self.theme_cls.primary_palette = "BlueGray"
         super().__init__(**kwargs)
+        self.store = JsonStore('rwar_vpn.json')
         
 
     def build(self):

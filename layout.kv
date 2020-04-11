@@ -14,6 +14,9 @@
 <BackLayerTextItem>
     size_hint_y: None
     height: "80dp"
+    text: ""
+    iden: ""
+
 
     IconLeftWidget:
         icon: root.icon
@@ -32,6 +35,7 @@
         helper_text_color: root.theme_cls.opposite_text_color
         foreground_color: app.theme_cls.opposite_text_color
         multiline: True
+        on_text: print(root.iden, self.text)
 
 
 <CheckboxBackdrop@BoxLayout>
@@ -144,9 +148,8 @@
                 BackLayerTextItem:
                     icon: "key"
                     text: ""
+                    iden: "DigitalOcean API key"
                     hint_text: "API key"
-                # CheckboxBackdrop:
-                #     text: "Checkbox text"
 
                 MDLabel:
                     text: "Automatic tear-down after "
@@ -182,8 +185,28 @@
                 spacing: "10dp"
 
                 MDLabel:
-                    text: "Types of TVs Home Theater Product"
+                    text: "DuckDns settings"
                     color: 1, 1, 1, 1
+                Widget:
+                Widget:
+                MDLabel:
+                    text: '[ref=https://www.duckdns.org/]No token or domain? [u]Create here[/u][/ref]'
+                    markup: True
+                    on_ref_press:
+                        import webbrowser
+                        webbrowser.open(args[1])
+                    color: 1, 1, 1, 1
+
+                BackLayerTextItem:
+                    icon: "web"
+                    text: ""
+                    iden: "DuckDns domain"
+                    hint_text: self.iden
+                BackLayerTextItem:
+                    icon: "key"
+                    text: ""
+                    iden: "DuckDns token"
+                    hint_text: self.iden
 
                 Widget:
                     size_hint_y: None
