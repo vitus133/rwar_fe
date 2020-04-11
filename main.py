@@ -1,10 +1,10 @@
 from kivy.lang import Builder
-from kivy.properties import StringProperty, BooleanProperty
+from kivy.properties import StringProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen
 from kivymd.app import MDApp
 from kivymd.theming import ThemableBehavior
-from kivymd.uix.dropdownitem import MDDropDownItem
+
 
 # Your layouts.
 Builder.load_file("layout.kv")
