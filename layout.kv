@@ -88,8 +88,8 @@
         padding: "5dp"
 
         ItemBackdropFrontLayer:
-            text: "Press item"
-            secondary_text: "to Configure DigitalOcean"
+            text: "DigitalOcean"
+            secondary_text: "Configuration"
             icon: "digital-ocean"
             on_press:
                 root.backlayer.current = "DigitalOcean screen"
@@ -97,16 +97,16 @@
                 root.backdrop.open()
 
         ItemBackdropFrontLayer:
-            text: "Press item"
-            secondary_text: "to Configure Freenom"
-            icon: "record-circle-outline"
+            text: "DuckDns"
+            secondary_text: "Configuration"
+            icon: "duck"
             on_press:
                 root.backlayer.current = "screen three"
                 root.backdrop.open()
 
         ItemBackdropFrontLayer:
-            text: "Press item"
-            secondary_text: "to Start VPN"
+            text: "VPN server"
+            secondary_text: "Create now"
             icon: "transfer-down"
             on_press:
                 root.backlayer.current = "screen three"
@@ -130,6 +130,15 @@
 
                 MDLabel:
                     text: "DigitalOcean settings"
+                    color: 1, 1, 1, 1
+                Widget:
+                Widget:
+                MDLabel:
+                    text: '[ref=https://m.do.co/c/5c155a477f8a/]No account? [u]Register here[/u][/ref]'
+                    markup: True
+                    on_ref_press:
+                        import webbrowser
+                        webbrowser.open(args[1])
                     color: 1, 1, 1, 1
 
                 BackLayerTextItem:
