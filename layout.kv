@@ -35,7 +35,8 @@
         helper_text_color: root.theme_cls.opposite_text_color
         foreground_color: app.theme_cls.opposite_text_color
         multiline: True
-        on_text: print(root.iden, self.text)
+        # on_text: print(root.iden, self.text)
+        on_text: app.store_kv(root.iden, self.text)
 
 
 <CheckboxBackdrop@BoxLayout>
@@ -147,7 +148,7 @@
 
                 BackLayerTextItem:
                     icon: "key"
-                    text: ""
+                    text: app.store.store_get('DigitalOcean API key') if app.store.store_exists('DigitalOcean API key') else ''
                     iden: "DigitalOcean API key"
                     hint_text: "API key"
 
@@ -199,12 +200,12 @@
 
                 BackLayerTextItem:
                     icon: "web"
-                    text: ""
+                    text: app.store.store_get('DuckDns domain') if app.store.store_exists('DuckDns domain') else ''
                     iden: "DuckDns domain"
                     hint_text: self.iden
                 BackLayerTextItem:
                     icon: "key"
-                    text: ""
+                    text: app.store.store_get('DuckDns token') if app.store.store_exists('DuckDns token') else ''
                     iden: "DuckDns token"
                     hint_text: self.iden
 

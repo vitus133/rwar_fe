@@ -6,11 +6,10 @@ from kivymd.app import MDApp
 from kivymd.theming import ThemableBehavior
 from kivy.storage.jsonstore import JsonStore
 
-
-# Your layouts.
+# Layouts
 Builder.load_file("layout.kv")
 
-# Usage example of MDBackdrop.
+# Screens
 Builder.load_file("backdrop.kv")
 
 
@@ -30,14 +29,14 @@ class MainApp(MDApp):
         self.theme_cls.primary_palette = "BlueGray"
         super().__init__(**kwargs)
         self.store = JsonStore('rwar_vpn.json')
-        
+        self.store.store_load()
 
     def build(self):
         self.root = ExampleBackdrop()
-    
-    def debug_print(self):
-        tb = ThemableBehavior()
-        print(tb.__dir__())
+
+    def store_kv(self, key: str, value: str):
+        self.store.store_put(key, value)
+        self.store.store_sync()
 
 
 if __name__ == "__main__":
