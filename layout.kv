@@ -109,11 +109,11 @@
             on_press:
                 root.backlayer.current = "DuckDns screen"
                 root.backdrop.open()
-
+        # TODO: Add here a screen for user, pass and PSK configuration
         ItemBackdropFrontLayer:
             text: "VPN server"
             secondary_text: "Deploy now"
-            icon: "transfer-down"
+            icon: "transfer-up"
             on_press:
                 progress_elements = [i.__class__.__name__ for i in root.ids.progress.children]
                 spinner_idx = progress_elements.index('MDSpinner')
