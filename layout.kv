@@ -112,11 +112,38 @@
 
         ItemBackdropFrontLayer:
             text: "VPN server"
-            secondary_text: "Create now"
+            secondary_text: "Deploy now"
             icon: "transfer-down"
             on_press:
-                root.backlayer.current = "DuckDns screen"
-                root.backdrop.open()
+                progress_elements = [i.__class__.__name__ for i in root.ids.progress.children]
+                spinner_idx = progress_elements.index('MDSpinner')
+                icon_idx = progress_elements.index('IconLeftWidget')
+                label_idx = progress_elements.index('MDLabel')
+                spinner = root.ids.progress.children[spinner_idx]
+                label = root.ids.progress.children[label_idx]
+                icon = root.ids.progress.children[icon_idx]
+                if not spinner.active: spinner.active = True; icon.icon = "creation"; label.text = "Deploying droplet..."
+                else: spinner.active = False; icon.icon = ""; label.text = ""
+#                root.backlayer.current = "DuckDns screen"
+#                root.backdrop.open()
+
+        BoxLayout:
+            id: progress
+            size_hint_y: None
+            height: "80dp"
+            spacing: "10dp"
+            padding: "15dp"
+            IconLeftWidget:
+                icon: '' # "creation"
+            MDSpinner:
+                size_hint: None, None
+                size: dp(20), dp(20)
+                pos_hint: {'center_x': 0, 'center_y': .5}
+                active: False
+                color: self.theme_cls.text_color
+            MDLabel:
+                text: ""
+
 
 
 <BackLayer@ScreenManager>
